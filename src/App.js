@@ -1,5 +1,6 @@
 import { Link, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
+import { Loans } from "./pages/Loans";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
 
@@ -14,6 +15,7 @@ function App() {
       </header>
       <Routes>
         <Route path = '/' element={<Home />} exact/>
+        <Route path = '/loans' element={<Loans />}/>
         <Route path = '/login' element={<Login />} exact/>
         <Route path = '/profile' element={<Profile/>} exact/>
       </Routes>
