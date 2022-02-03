@@ -92,7 +92,6 @@ export const TableLoansHeader = ({dispatch,sortByObj}) => {
                         direction={sortBy === 'status' ? orderBy : 'desc'}>
                         Статус
                     </TableSortLabel>
-                    Статус
                 </TableCell>
                 <TableCell>
                     <TableSortLabel

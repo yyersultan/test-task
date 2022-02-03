@@ -1,27 +1,53 @@
-import { SET_LOANS, SET_SORT_BY } from "../actions/table";
+import { SET_FILTER_ITEM, SET_LOADING, SET_LOANS, SET_SORT_BY } from "../actions/table";
 
 const initalState = {
+    isLoading: false,
     loans: {},
+    loans_save: {},
     sortByObj:{sortBy: 'id',orderBy:'asc'},
-    
+    filters: {
+        subsidiary: [],
+        compony: [],
+        segment: [],
+        status: [],
+        in_work:[]
+    }
 }
 
 export const tableReducer = (state=initalState,action) => {
     switch(action.type){
+        case SET_LOADING:
+            return {
+                ...state,
+                isLoading: action.payload
+            }
         case SET_LOANS:
             return{
                 ...state,
-                loans: action.payload
+                loans_save: action.payload,
+                loans: action.payload,
+                isLoading: false
             }
         case SET_SORT_BY:
-            const loans = compare({...state.loans},action.payload.sortBy,action.payload.orderBy);
-            console.log(loans);
+            const loans = compare({...state.loans},
+            action.payload.sortBy,action.payload.orderBy);
             return {
                 ...state,
                 loans,
                 sortByObj:action.payload
             }
-
+        case SET_FILTER_ITEM:
+            const filters = {...state.filters};
+            const{name,col} = action.payload;
+            if(filters[col].includes(name)){
+                filters[col] = filters[col].filter(item => item !== name);
+            }else{
+                filters[col] = [...filters[col],name];
+            }
+            return{
+                ...state,
+                filters
+            }
         default : return state;
     }
 }
