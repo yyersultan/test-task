@@ -44,10 +44,8 @@ export const login = (username,password) => async(dispatch) => {
                 localStorage.setItem('username',username);
                 dispatch(setIsAut(true));
                 dispatch(setUsername(isUser.username));
-                console.log('YES user exists');
             }else{
                 dispatch(setError('Username or Password Incorrect'));
-                console.log('User no');
             }
         },1000);
     }catch(e){

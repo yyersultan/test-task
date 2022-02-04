@@ -5,45 +5,61 @@ import {setFilterItem} from '../../store/actions/table';
 import { sortFilterItems } from "../../utils/sortFilterItems";
 
 export const FilterItem = memo(({filter_obj,col_name,col,active_filters}) => {
+    
     const dispatch = useDispatch();
     const[filterObj,setFilterObj] = useState(filter_obj);
-    const[sortByName,setSortByName] = useState(false);
-    const[sortByCount,setSortByCount] = useState(false);
+    const[sortByFilterItem,setSortByFilterItem] = useState({
+        name: false,
+        count: false
+    });
 
     const onFilterItemClick = (name) => {
         dispatch(setFilterItem({col,name}));
     }
-    useEffect(() => {
-        setSortByCount(false);
-        if(sortByName){
-            const new_obj = sortFilterItems(filterObj,'name');
-            setFilterObj(new_obj);
-        }
-    },[sortByName]);
+    const changeNameFilter = () => {
+        setSortByFilterItem({
+            name: true,
+            count: false
+        });
+    }
+    const changeCountFilter = () => {
+        setSortByFilterItem({
+            name: false,
+            count: true
+        })
+    }
 
     useEffect(() => {
-        setSortByName(false);
-        if(sortByCount){
+        if(sortByFilterItem.name){
+            const new_obj = sortFilterItems(filterObj,'name');
+            setFilterObj(new_obj);
+        }if(sortByFilterItem.count){
             const new_obj = sortFilterItems(filterObj,'count');
             setFilterObj(new_obj);
         }
-       
-    },[sortByCount]);
-    console.log(sortByCount);
+    },[sortByFilterItem]);
+
+    const clearFilterItem = () => {
+        setSortByFilterItem({name: false,count: false});
+    }
+
+
+    const {name,count} = sortByFilterItem
     return (
         <div>
         <h2>{col_name} 
         <i className="fas fa-search"/>
          </h2>
         <div className="row">
-            <Button 
-            onClick={() => setSortByName(true)} >
+            <Button variant={name ? 'contained':'text'}
+            onClick={changeNameFilter} >
                 Aad <i className="fas fa-arrows-alt-v"/>
             </Button>
-            <Button 
-            onClick={() => setSortByCount(true)}>
+            <Button variant= {count ? 'contained':'text'}
+            onClick={changeCountFilter}>
                 # <i className="fas fa-arrows-alt-v"/>
             </Button>
+            <Button onClick = {clearFilterItem}>X</Button>
         </div>
         <ul className="FilterItem">
             {Object.keys(filterObj).map((name,index) => {
