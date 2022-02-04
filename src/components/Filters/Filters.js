@@ -25,6 +25,9 @@ export const Filters = memo(({loans,filters}) => {
                     Hide filters
                 </Button>
             </section>
+            <div className="clearFilters">
+                <Button>Clear filters</Button>
+            </div>
             {/* Filters section  */}
             
             {showFilters && <section className="Filter_Items_Container">

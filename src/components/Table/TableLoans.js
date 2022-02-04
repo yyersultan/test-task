@@ -1,4 +1,4 @@
-import { Paper, TableBody, TextField } from "@mui/material";
+import { Paper, TableBody, TablePagination, TextField } from "@mui/material";
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { getLoansData } from "../../store/actions/table";
@@ -13,6 +13,16 @@ export const TableLoans = () => {
     const {loans,sortByObj,loans_save,filters,isLoading} = useSelector(state => state.table);
     const[search,setSearch] = useState('');
     const[filtered_loans,setFilterLoans] = useState({...loans});
+    const[page,setPage] = useState(0);
+    const[rowsPerPage,setRowsPerPage] = useState(4);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     const onInputCh = (e) => setSearch(e.target.value)
 
@@ -45,20 +55,31 @@ export const TableLoans = () => {
     return (
         <>
         <Filters filters = {filters} loans={loans_save}/>
-        <TextField value={search} onChange={onInputCh}/>
+        <TextField label='Search' style={{margin:'20px'}} 
+        size="small"  value={search} onChange={onInputCh}/> 
         <Paper >
             <TableLoansHeader 
                 sortByObj = {sortByObj}
                 dispatch = {dispatch}
             />
             <TableBody>
-                {Object.keys(filtered_loans).map((key,index) => (
+                {Object.keys(filtered_loans)
+                .slice(page*rowsPerPage,page*rowsPerPage + rowsPerPage)
+                .map((key,index) => (
                     <TableLoansRow 
                     key={key}
                     index = {index}
                     data = {filtered_loans[key]}/>
                 ))}
             </TableBody>
+            <TablePagination 
+                rowsPerPageOptions={[3,4,5]}
+                rowsPerPage={rowsPerPage}
+                count={Object.keys(loans).length} 
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                />
         </Paper>
         </>
     )

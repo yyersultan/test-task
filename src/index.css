@@ -87,7 +87,7 @@ code {
   transition: all .2s ease;
 }
 .FilterItem_item:hover{
-  background-color: silver;
+  color: #1976d2;
 }
 .FilterItem_count {
   background-color: silver;
@@ -95,5 +95,17 @@ code {
   border-radius: 10px;
 }
 .FilterItem_item_active {
-  background-color: silver;
+  background-color: #8bc34a;
+}
+.clearFilters {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+.fa-search {
+  margin-left: 40px;
+  color: silver;
+}
+.row {
+  display: flex;
 }
