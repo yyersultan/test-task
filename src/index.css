@@ -13,9 +13,9 @@ code {
 }
 
 .App-header {
+  margin-top: 10px;
   display: flex;
   justify-content: space-evenly;
-
 }
 
 .Login {
@@ -23,6 +23,15 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.Home {
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Profile {
+  margin: 50px;
 }
 .LoginForm {
   border-radius: 20px;
@@ -84,4 +93,7 @@ code {
   background-color: silver;
   padding: 2px 15px;
   border-radius: 10px;
+}
+.FilterItem_item_active {
+  background-color: silver;
 }

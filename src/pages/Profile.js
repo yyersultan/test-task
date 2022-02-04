@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
@@ -21,17 +21,16 @@ export const Profile = () => {
     }
 
     useEffect(() => {
-        const isUser = localStorage.getItem('isAuth');
-        
-        if(!isUser){
+        if(!isAuth){
             return navigate('/login')
         }
     },[isAuth]);
     return (
-        <div>
+        <div className="Profile">
             <h1>Welcome to Profile page</h1>
             <h2>{user} </h2>
-            <Button onClick = {onLogout}>Logout</Button>
+            <Button color="secondary" variant="contained" onClick = {onLogout}>Logout</Button>
+            
         </div>
     )
 }

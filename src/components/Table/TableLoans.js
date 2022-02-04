@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getLoansData } from "../../store/actions/table";
 import { filterColumns } from "../../utils/filterColumns";
 import { Filters } from "../Filters/Filters";
+import { Loading } from "../Loading/Loading";
 import { TableLoansHeader } from "./TableLoansHeader";
 import { TableLoansRow } from "./TableLoansRow";
 
@@ -38,12 +39,12 @@ export const TableLoans = () => {
     },[filters]);
     
     if(isLoading){
-        return <div>Loading ...</div>
+        return <Loading />
     }
     
     return (
         <>
-        <Filters loans={loans_save}/>
+        <Filters filters = {filters} loans={loans_save}/>
         <TextField value={search} onChange={onInputCh}/>
         <Paper >
             <TableLoansHeader 

@@ -1,4 +1,4 @@
-import { AUTH_LOGOUT, AUTH_SUCCESS, SET_ERROR, SET_LOADING } from "../actions/auth"
+import { AUTH_LOGOUT, SET_ERROR, SET_IS_AUTH, SET_LOADING, SET_USERNAME } from "../actions/auth"
 
 const initalState = {
     isAuth: false,
@@ -14,13 +14,19 @@ export const authReducer = (state=initalState,action) => {
                 ...state,
                 isLoading: action.payload,
             }
-        case AUTH_SUCCESS:
+        case SET_IS_AUTH:
+            return {
+                ...state,
+                isAuth: action.payload,
+                isLoading: false,
+                error:''
+            }
+        case SET_USERNAME:
             return {
                 ...state,
                 username: action.payload,
-                isAuth: true,
                 isLoading: false,
-                error:''
+                error: ''
             }
         case AUTH_LOGOUT:
             return {

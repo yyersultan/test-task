@@ -5,7 +5,7 @@ import { FilterItem } from "./FilterItem";
 
 const filters_item = {'subsidiary':'Филиал','segment':'Сегмент','compony':'Компания','status':'Статус','in_work':'В работе'};
 
-export const Filters = memo(({loans}) => {
+export const Filters = memo(({loans,filters}) => {
     
     const[showFilters,setShowFilters] = useState(true);
     const onShowFilterHandle = () => setShowFilters(prev=> !prev);
@@ -31,6 +31,7 @@ export const Filters = memo(({loans}) => {
                 {Object.keys(filters_item).map((key,i) => {
                     const obj_count = countCol(loans,key);
                     return <FilterItem 
+                                active_filters = {filters[key]}
                                 col = {key}
                                 col_name = {filters_item[key]}
                                 key={`${key}+${i}`}

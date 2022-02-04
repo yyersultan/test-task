@@ -4,7 +4,7 @@ import { setSortByAc } from "../../store/actions/table"
 export const TableLoansHeader = ({dispatch,sortByObj}) => {
     const sortBy = sortByObj['sortBy'];
     const orderBy = sortByObj['orderBy'];
-    console.log(sortByObj);
+    
     const onSortHandle = (row) => {
         let ord = (orderBy==='asc')?'desc':'asc';
         dispatch(setSortByAc({"sortBy":row,"orderBy":ord}));

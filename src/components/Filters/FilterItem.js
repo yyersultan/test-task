@@ -1,7 +1,9 @@
+import { memo } from "react";
 import { useDispatch } from "react-redux";
 import {setFilterItem} from '../../store/actions/table';
 
-export const FilterItem = ({filter_obj,col_name,col}) => {
+export const FilterItem = memo(({filter_obj,col_name,col,active_filters}) => {
+    console.log(active_filters);
     const dispatch = useDispatch();
 
     const onFilterItemClick = (name) => {
@@ -15,7 +17,7 @@ export const FilterItem = ({filter_obj,col_name,col}) => {
                 return (
                 <li 
                 onClick={() => onFilterItemClick(name)}
-                className="FilterItem_item"
+                className={`FilterItem_item ${active_filters.includes(name) && 'FilterItem_item_active'}`}
                 key={`${name}&${index}`}>
                     <div>{name}</div>
                     <div className="FilterItem_count"> 
@@ -27,4 +29,4 @@ export const FilterItem = ({filter_obj,col_name,col}) => {
         </ul>
         </div>
     )
-}
+})

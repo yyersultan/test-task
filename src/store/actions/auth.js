@@ -1,9 +1,10 @@
 import axios from "axios";
 
 export const SET_LOADING = 'SET_LOADING';
-export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const SET_USERNAME = 'SET_USERNAME';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const  SET_ERROR = 'SET_ERROR';
+export const SET_IS_AUTH = 'SET_IS_AUTH';
 
 export const setIsLoading = (loading) => {
     return {
@@ -11,10 +12,17 @@ export const setIsLoading = (loading) => {
         payload : loading
     }
 }
-export const setAuth = (username) => {
+export const setUsername = (username) => {
     return {
-        type: AUTH_SUCCESS,
+        type: SET_USERNAME,
         payload : username
+    }
+}
+
+export const setIsAut = (payload) => {
+    return {
+        type: SET_IS_AUTH,
+        payload
     }
 }
 
@@ -34,7 +42,8 @@ export const login = (username,password) => async(dispatch) => {
             if(isUser) {
                 localStorage.setItem('isAuth',true);
                 localStorage.setItem('username',username);
-                dispatch(setAuth(isUser.username));
+                dispatch(setIsAut(true));
+                dispatch(setUsername(isUser.username));
                 console.log('YES user exists');
             }else{
                 dispatch(setError('Username or Password Incorrect'));

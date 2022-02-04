@@ -1,4 +1,4 @@
-import { SET_FILTER_ITEM, SET_LOADING, SET_LOANS, SET_SORT_BY } from "../actions/table";
+import { SET_FILTER_ITEM, SET_LOADING_TABLE, SET_LOANS, SET_SORT_BY } from "../actions/table";
 
 const initalState = {
     isLoading: false,
@@ -16,7 +16,7 @@ const initalState = {
 
 export const tableReducer = (state=initalState,action) => {
     switch(action.type){
-        case SET_LOADING:
+        case SET_LOADING_TABLE:
             return {
                 ...state,
                 isLoading: action.payload

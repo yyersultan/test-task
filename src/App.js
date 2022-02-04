@@ -1,18 +1,28 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, Route, Routes } from "react-router-dom";
+import { Navbar } from "./components/Navbar/Navbar";
 import { Home } from "./pages/Home";
 import { Loans } from "./pages/Loans";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
+import {  setIsAut, setUsername } from "./store/actions/auth";
 
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(localStorage.getItem('isAuth')){
+      dispatch(setIsAut(true));
+      const username = localStorage.getItem('username')||'';
+      dispatch(setUsername(username));
+      
+    }
+  },[dispatch]);
   return (
     <div className="App">
-      <header className="App-header">
-        <Link to={'/'}>Home</Link>
-        <Link to={'/loans'}>Loans</Link>
-        <Link to={'/profile'}>Profile</Link>
-      </header>
+      <Navbar />
       <Routes>
         <Route path = '/' element={<Home />} exact/>
         <Route path = '/loans' element={<Loans />}/>
