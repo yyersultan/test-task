@@ -1,7 +1,8 @@
 import { TableCell, TableHead, TableRow, TableSortLabel } from "@mui/material"
+import { memo } from "react";
 import { setSortByAc } from "../../store/actions/table"
 
-export const TableLoansHeader = ({dispatch,sortByObj}) => {
+export const TableLoansHeader = memo(({dispatch,sortByObj}) => {
     const sortBy = sortByObj['sortBy'];
     const orderBy = sortByObj['orderBy'];
     
@@ -115,4 +116,4 @@ export const TableLoansHeader = ({dispatch,sortByObj}) => {
             </TableRow>
         </TableHead>
     )
-}
+})

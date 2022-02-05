@@ -1,6 +1,7 @@
 import { Button, TableCell, TableRow } from "@mui/material"
+import { memo } from "react";
 
-export const TableLoansRow = ({data}) => {
+export const TableLoansRow = memo(({data}) => {
     const date_time = data.Date.split(' ');
     const date = date_time[0].split(',').join('.')
     return(
@@ -31,4 +32,4 @@ export const TableLoansRow = ({data}) => {
 
         </TableRow>
     )
-}
+})

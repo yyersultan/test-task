@@ -66,7 +66,8 @@ export const FilterItem = memo(({filter_obj,col_name,col,active_filters}) => {
                 return (
                 <li 
                 onClick={() => onFilterItemClick(name)}
-                className={`FilterItem_item ${active_filters.includes(name) && 'FilterItem_item_active'}`}
+                className={`FilterItem_item ${active_filters.includes(name) 
+                && 'FilterItem_item_active'}`}
                 key={`${name}&${index}`}>
                     <div>{name}</div>
                     <div className="FilterItem_count"> 

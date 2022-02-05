@@ -1,14 +1,19 @@
 import { Button } from "@mui/material";
 import { memo, useState } from "react"
+import { useDispatch } from "react-redux";
+import { clearFilters } from "../../store/actions/table";
 import { countCol } from "../../utils/counter";
 import { FilterItem } from "./FilterItem";
 
 const filters_item = {'subsidiary':'Филиал','segment':'Сегмент','compony':'Компания','status':'Статус','in_work':'В работе'};
 
 export const Filters = memo(({loans,filters}) => {
-    
+    const dispatch = useDispatch();
     const[showFilters,setShowFilters] = useState(true);
     const onShowFilterHandle = () => setShowFilters(prev=> !prev);
+
+    
+    const  onClearClick = () => dispatch(clearFilters());
     return (
         <div className="Filters">
             <section>
@@ -26,7 +31,7 @@ export const Filters = memo(({loans,filters}) => {
                 </Button>
             </section>
             <div className="clearFilters">
-                <Button>Clear filters</Button>
+                <Button onClick={onClearClick}>Clear filters</Button>
             </div>
             {/* Filters section  */}
             

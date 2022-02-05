@@ -1,4 +1,4 @@
-import { SET_FILTER_ITEM, SET_LOADING_TABLE, SET_LOANS, SET_SORT_BY } from "../actions/table";
+import { CLEAR_FILTERS, SET_FILTER_ITEM, SET_LOADING_TABLE, SET_LOANS, SET_SORT_BY } from "../actions/table";
 
 const initalState = {
     isLoading: false,
@@ -35,6 +35,17 @@ export const tableReducer = (state=initalState,action) => {
                 ...state,
                 loans,
                 sortByObj:action.payload
+            }
+        case CLEAR_FILTERS:
+            return {
+                ...state,
+                filters : {
+                    subsidiary: [],
+                    compony: [],
+                    segment: [],
+                    status: [],
+                    in_work:[]
+                }
             }
         case SET_FILTER_ITEM:
             const filters = {...state.filters};
